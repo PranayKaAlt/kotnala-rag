@@ -43,7 +43,8 @@ def get_chunks(raw_text):
 # using all-MiniLm embeddings model and faiss to get vectorstore
 def get_vectorstore(chunks):
     embeddings=HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
-                                     model_kwargs={'device':'cpu'})
+                                     model_kwargs={'device':'cpu'},
+                                     cache_folder="/tmp/embeddings")
     vectorstore=faiss.FAISS.from_texts(texts=chunks,embedding=embeddings)
     return vectorstore
 
